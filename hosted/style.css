@@ -263,3 +263,12 @@ h3.domoAge {
 .domo:last-child {
     margin-bottom:10px;
 }
+
+#train {
+    width: 40%;
+    min-width: 400px;
+    border: 2px solid #55acee;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
