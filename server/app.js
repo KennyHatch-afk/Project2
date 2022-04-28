@@ -16,7 +16,7 @@ const router = require('./router.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/Domomaker';
+const dbURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1/FightingMons';
 mongoose.connect(dbURI, (err) => {
     if(err) {
         console.log('Could not connect to database');
@@ -40,7 +40,6 @@ app.use(helmet({
     contentSecurityPolicy: false,
 }));
 app.use('/assets', express.static(path.resolve(`${__dirname}/../hosted/`)));
-app.use(favicon(`${__dirname}/../hosted/img/favicon.png`));
 app.use(compression());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -50,7 +49,7 @@ app.use(session({
     store: new RedisStore({
         client: redisClient,
     }),
-    secret: 'Domo Arigato',
+    secret: 'Mons Are Here',
     resave: true,
     saveUninitialized: true,
     cookie: {

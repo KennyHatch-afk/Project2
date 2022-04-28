@@ -1,2 +1,3 @@
 module.exports.Account = require('./Account.js');
-module.exports.Domo = require('./Domo.js');
+module.exports.Mon = require('./Mons.js');
+module.exports.Money = require('./Money.js');

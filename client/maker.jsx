@@ -1,11 +1,11 @@
 const helper = require('./helper.js');
 let csrfToken = "";
 
-const handleDomo = (e) => {
+const handleMon = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const name = e.target.querySelector('#domoName').value;
+    const name = e.target.querySelector('#monName').value;
     const _csrf = e.target.querySelector('#_csrf').value;
 
     if(!name) {
@@ -13,7 +13,7 @@ const handleDomo = (e) => {
         return false;
     }
 
-    helper.sendPost(e.target.action, {name, _csrf}, loadDomosFromServer);
+    helper.sendPost(e.target.action, {name, _csrf}, loadMonsFromServer);
 
     return false;
 }
@@ -22,64 +22,73 @@ const trainHealth = (e) => {
     e.preventDefault();
     helper.hideError();
 
-    const nameArray =  e.target.parentElement.querySelector('#domoName').innerHTML.split("Name:");
+    const nameArray =  e.target.parentElement.querySelector('#monName').innerHTML.split("Name:");
     const name = nameArray[1].trim();
     const _csrf = csrfToken;
-
-    helper.sendPost('/update', {name, _csrf}, loadDomosFromServer);
-
-    //const result = await response.json();
-
-    //helper.sendPost("/update", {name}, updateDomo);
-}
-
-const updateDomo = async () => {
-    //const response = await fetch('/update');
-    //const data = await response.json();
+    const train = "health";
+    
+    helper.sendPost('/update', {name, _csrf, train}, loadMonsFromServer);
+    helper.sendPost('/pay', {_csrf}, loadMonsFromServer);
 }
 
 const trainAttack = (e) => {
-    console.log("good");
+    e.preventDefault();
+    helper.hideError();
+
+    const nameArray =  e.target.parentElement.querySelector('#monName').innerHTML.split("Name:");
+    const name = nameArray[1].trim();
+    const _csrf = csrfToken;
+    const train = "attack";
+    
+    helper.sendPost('/update', {name, _csrf, train}, loadMonsFromServer);
 }
 
 const trainSpeed = (e) => {
-    console.log("good");
+    e.preventDefault();
+    helper.hideError();
+
+    const nameArray =  e.target.parentElement.querySelector('#monName').innerHTML.split("Name:");
+    const name = nameArray[1].trim();
+    const _csrf = csrfToken;
+    const train = "speed";
+    
+    helper.sendPost('/update', {name, _csrf, train}, loadMonsFromServer);
 }
 
-const DomoForm = (props) => {
+const MonForm = (props) => {
     return (
-        <form id="domoForm"
-            onSubmit={handleDomo}
-            name="domoForm"
+        <form id="monForm"
+            onSubmit={handleMon}
+            name="monForm"
             action="/maker"
             method="POST"
-            className="domoForm"
+            className="monForm"
         >
             <label htmlFor="name">Name: </label>
-            <input id="domoName" type="text" name="name" placeholder="Domo Name" />
+            <input id="monName" type="text" name="name" placeholder="Put Mons Name Here" />
             <input id="_csrf" type="hidden" name="_csrf" value={props.csrf} />
-            <input className="makeDomoSubmit" type="submit" value="Make Domo" />
+            <input className="makeMonSubmit" type="submit" value="Make new Mons" />
         </form>
     );
 }
 
-const DomoList = (props) => {
-    if(props.domos.length === 0) {
+const MonList = (props) => {
+    if(props.mons.length === 0) {
         return (
-            <div className="domoList">
-                <h3 className="emptyDomo">No Domos Yet!</h3>
+            <div className="monList">
+                <h3 className="emptyMon">No Mons Yet!</h3>
             </div>
         );
     }
 
-    const domoNodes = props.domos.map(domo => {
+    const monNodes = props.mons.map(mon => {
         return (
-            <div key={domo._id} className="domo" >
-                <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
-                <h3 id="domoName" className="domoName"> Name: {domo.name} </h3>
-                <h3 className="domoHealth"> Health: {domo.health} </h3>
-                <h3 className="domoAttack"> Attack: {domo.attack} </h3>
-                <h3 className="domoSpeed"> Speed: {domo.speed} </h3>
+            <div key={mon._id} className="mon" >
+                <img src="/assets/img/monster-cartoon.png" alt="monster" className="monFace" />
+                <h3 id="monName" className="monName"> Name: {mon.name} </h3>
+                <h3 className="monHealth"> Health: {mon.health} </h3>
+                <h3 className="monAttack"> Attack: {mon.attack} </h3>
+                <h3 className="monSpeed"> Speed: {mon.speed} </h3>
                 <input onClick={trainHealth} className="trainHealth" type="button" value="Health" />
                 <input onClick={trainAttack} className="trainAttack" type="button" value="Attack" />
                 <input onClick={trainSpeed} className="trainSpeed" type="button" value="Speed" />
@@ -88,18 +97,28 @@ const DomoList = (props) => {
     });
 
     return (
-        <div className="domoList">
-            {domoNodes}
+        <div className="monList">
+            {monNodes}
         </div>
     );
 }
 
-const loadDomosFromServer = async () => {
-    const response = await fetch('/getDomos');
+const MoneyCounter = (props) => {
+    return (
+        <div id="moneyCounter"
+            name="moneyCounter"
+        >
+            <label htmlFor="money">Money: {props.money}</label>
+        </div>
+    );
+}
+
+const loadMonsFromServer = async () => {
+    const response = await fetch('/getMons');
     const data = await response.json();
     ReactDOM.render(
-        <DomoList domos={data.domos} />,
-        document.getElementById('domos')
+        <MonList mons={data.mons} />,
+        document.getElementById('mons')
     );
 }
 
@@ -110,16 +129,24 @@ const init = async () => {
     csrfToken = data.csrfToken;
     console.log(data.csrfToken);
     ReactDOM.render(
-        <DomoForm csrf={data.csrfToken} />,
-        document.getElementById('makeDomo')
+        <MonForm csrf={data.csrfToken} />,
+        document.getElementById('makeMon')
     );
 
     ReactDOM.render(
-        <DomoList domos={[]} />,
-        document.getElementById('domos')
+        <MonList mons={[]} />,
+        document.getElementById('mons')
     );
 
-    loadDomosFromServer();
+    loadMonsFromServer();
+
+    const newResponse = await fetch('/start');
+    const newData = await newResponse.json();
+
+    ReactDOM.render(
+        <MoneyCounter money={newData.money} />,
+        document.getElementById('money')
+    );
 }
 
 window.onload = init;
