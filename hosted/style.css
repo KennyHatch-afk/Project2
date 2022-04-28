@@ -6,20 +6,13 @@ html, body {
     overflow-x: hidden;
 }
 
-#logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float:left;
-    border-radius: 8px;
-}
-
 #Title {
     float:left;
     color: white;
     position: relative;
     bottom: 5px;
     text-decoration: none;
+    padding-left: 25px;
 }
 
 #money {
@@ -35,11 +28,7 @@ html, body {
 nav {
     width: 100%;
     height: 50px;
-    background-color: #55acee;
-}
-
-nav:nth-child(1) {
-    padding-left: 25px;
+    background-color: lightgray;
 }
 
 .navlink {
@@ -56,59 +45,32 @@ nav:nth-child(1) {
     text-decoration: none;
     padding: 5px;
     border-radius: 4px;
-    background-color: #55acee;
-    transition: background-color 0.4s ease;
 }
 
-.navlink a:hover {
-    transition: background-color 0.8s ease;
-    background-color: #66bdff;
+#loginForm {
+    width: 70%;
+    min-width: 300px;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 20px;
 }
 
-.monForm {
-    border: 2px solid #338acc;
-    height: 35px;
-    width: 500px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #55acee;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
-    border-bottom-left-radius: 4px;
-    border-top-left-radius: 4px;
-    padding-left: 30vw;
-}
-
-.monForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
+#errorMessage {
     font-size: 1.2em;
-    float: left;
-    color: white;
+    font-weight: bold;
+    color: red;
+    font-style: italic;
 }
 
-.monForm input[type=text] {
-    float:left;
-}
-
-.makeMonSubmit {
-    transition: background-color 0.4s ease;
-    display: inline;
-    width: 150px;
-    background-color: #55acee;
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
-}
-
-.makeMonSubmit:link, .makeMonSubmit:visited, .makeMonSubmit:hover, .makeMonSubmit:active {
-    color: white;
-}
-
-.makeMonSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+#monMessage {
+    top: 130px;
+    height: 10%;
+    width: 40%;
+    position: absolute;
+    z-index: 200;
+    overflow: hidden;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .mainForm {
@@ -131,76 +93,29 @@ nav:nth-child(1) {
     font-size: 1.2em;
 }
 
-.formSubmit {
-    transition: background-color 0.4s ease;
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 14px;
-    font-size: 1.2em;
-    width: 100px;
-    background-color: #55acee;
-    border-radius: 2px;
-    border-color: #66acee;
-    padding: 3px 0px;
-    color: white;
-    text-decoration: none;
+.monForm {
+    height: 35px;
+    width: 100%;
+    margin-top:0px;
+    padding-top:10px;
+    background-color: lightgray;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    padding-left: 30vw;
 }
 
-.formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+img.monFace {
+    margin-left: 25px;
+    margin-right: 10px;
+    height: 50px;
+    width: 50px;
+    border-radius: 4px;
+    margin-top:10px;
+    float:left;
 }
 
-.formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
-}
-
-#user, #pass, #pass2 {
-    text-align: center;
-    font-size: 1.1em;
-    width: 180px;
-    border-radius: 6px;
-}
-
-#user:focus, #pass:focus, #pass2:focus {
-    outline: none;
-    box-shadow: 0px 0px 1px 1px #55acee;
-}
-
-.hidden {
-    display: none;
-}
-
-#monMessage {
-    top: 130px;
-    height: 10%;
-    width: 40%;
-    position: absolute;
-    z-index: 200;
-    overflow: hidden;
-    left: 50%;
-    transform: translate(-50%, 0%);
-}
-
-#monMessage h3 {
-    width: fit-content;
-    position: absolute;
-    top: 0px;
-}
-
-#speech {
-    height: 120px;
-    width: 250px;
-    z-index:300;
-}
-
-#errorMessage {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: red;
-    font-style: italic;
-}
 
 #mon {
     z-index: 225;
@@ -216,7 +131,7 @@ nav:nth-child(1) {
 #mons {
     width: 40%;
     min-width: 400px;
-    border: 2px solid #55acee;
+    border: 2px solid lightgray;
     border-radius: 4px;
     margin: 0 auto;
     margin-top: 100px;
@@ -227,69 +142,9 @@ nav:nth-child(1) {
     margin: 0 auto;
     margin-top: 2px;
     margin-bottom: 2px;
-    border: 2px solid #55acee;
     border-radius: 4px;
-    background-color: #55acee;
+    background-color: lightgray;
     padding: 10px;
     min-height:60px;
     overflow: hidden;
-}
-
-.mon:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
-}
-
-img.monFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
-    border-radius: 4px;
-    margin-top:10px;
-    float:left;
-}
-
-h3.emptyMon {
-    width: 400px;
-    font-size: 1.5em;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 18px;
-}
-
-h3.monName {
-    float:left;
-    width: 200px;
-    font-weight: bold;
-    padding-left: 65px;
-    font-size: 1.5em;
-}
-
-h3.monAge {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
-}
-
-.mon:first-child {
-    margin-top: 10px;
-}
-
-.mon:last-child {
-    margin-bottom:10px;
-}
-
-#train {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #55acee;
-    border-radius: 4px;
-    margin: 0 auto;
-    margin-top: 20px;
 }
